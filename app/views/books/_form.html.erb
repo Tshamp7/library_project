@@ -1,0 +1,46 @@
+
+<% if action == :edit %>
+  <% action_url = book_url(book) %>
+<% else %>
+  <% action_url = books_url %>
+<% end %>
+
+<form action="<%= action_url %>" method="post">
+<% if action == :edit %>
+  <input type="hidden" name="_method" value="PATCH">
+<% end %>
+
+  <label for="title">Title</label>
+  <input id="title" type="text" name="book[title]" value="<%= book.title %>">
+<br>
+<br>
+ <label for="author">Author</label>
+  <input id="author" type="text" name="book[author]" value="<%= book.author %>">
+<br>
+<br>
+   <label for="year">Year</label>
+  <input id="Year" type="number" name="book[year]" value="<%= book.year %>">
+<br>
+<br>
+    <label for="category">Category</label>
+   <select name="book[category]">
+       <option disabled <%= action == :new ? "selected" : "" %>>-- Please Select --</option>
+       <option value="Science-Fiction" <%= @book.category == "Science-Fiction" ? "selected" : "" %>>Science-Fiction</option>
+       <option value="Fantasy" <%= @book.category == "Fantasy" ? "selected" : "" %>>Fantasy</option>
+       <option value="Mystery"<%= @book.category == "Mystery" ? "selected" : "" %>>Mystery</option>
+       <option value="History"<%= @book.category == "History" ? "selected" : "" %>>History</option>
+       <option value="Non-Fiction"<%= @book.category == "Non-Fiction" ? "selected" : "" %>>Non-Fiction</option>
+       <option value="Autobiography"<%= @book.category == "Autobiography" ? "selected" : "" %>>Autobiography</option>
+   </select>
+<br>
+<br>
+   <label for="description">Description</label>
+<br>
+   <textarea name="book[description]">
+    <%= book.description %>
+   </textarea>
+<br>
+  <input type="submit" value="<%= action == :edit ? "Update Book" : "Add Book" %>">
+</form>
+
+<p><%= link_to("Back to Books", books_url) %> </p>

@@ -1,0 +1,7 @@
+<h1>My Library App!</h1>
+<ul>
+    <% @book.each do |book| %>
+        <li><%= link_to("#{book.title}", book_path(Book.find(book.id))) %></li>
+    <% end  %>
+</ul>
+<p><%= link_to("Add a book", new_book_url) %>
